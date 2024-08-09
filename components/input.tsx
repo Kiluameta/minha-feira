@@ -16,18 +16,8 @@ type InputProps = ViewProps & {
   variant?: Variants;
 };
 
-function Input({
-  children,
-  variant = "primary",
-  ...rest
-}: InputProps) {
-  return (
-    <View
-      {...rest}
-    >
-      {children}
-    </View>
-  );
+function Input({ children, variant = "primary", ...rest }: InputProps) {
+  return <View {...rest}>{children}</View>;
 }
 
 function Field({ ...rest }: TextInputProps) {

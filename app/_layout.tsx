@@ -1,27 +1,28 @@
-import 'react-native-reanimated';
+import React from "react";
+import "react-native-reanimated";
 
-import { useEffect } from 'react';
-import { Stack } from 'expo-router';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { PaperProvider } from 'react-native-paper';
+import { useEffect } from "react";
+import { router, Stack } from "expo-router";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { PaperProvider } from "react-native-paper";
 
-import * as SplashScreen from 'expo-splash-screen';
+import * as SplashScreen from "expo-splash-screen";
 import {
   useFonts,
   Lexend_400Regular,
   Lexend_500Medium,
   Lexend_600SemiBold,
-} from '@expo-google-fonts/lexend'
+} from "@expo-google-fonts/lexend";
 
-import Loading from '@/components/loading';
+import Loading from "@/components/loading";
 
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
-} from 'expo-router';
+} from "expo-router";
 
 SplashScreen.preventAutoHideAsync();
-export default function RootLayout() {
+export default function App() {
   const [loaded] = useFonts({
     Lexend_400Regular,
     Lexend_500Medium,
@@ -34,21 +35,31 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  if (!loaded) return <Loading/>
+  const onLayout = () => {
+    let userSession = false;
+    if (userSession) {
+      router.navigate("/(tabs)");
+    } else {
+      router.navigate("/");
+    }
+  };
+
+  if (!loaded) return <Loading />;
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider onLayout={onLayout}>
       <PaperProvider>
-        <RootLayoutNav/>
+        <RootLayout />
       </PaperProvider>
     </SafeAreaProvider>
-  )
+  );
 }
 
-function RootLayoutNav() {
+function RootLayout() {
   return (
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    </Stack>
   );
 }

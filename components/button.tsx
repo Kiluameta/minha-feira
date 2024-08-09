@@ -21,10 +21,7 @@ function Button({
   ...rest
 }: ButtonProps) {
   return (
-    <TouchableOpacity
-      disabled={disabled}
-      {...rest}
-    >
+    <TouchableOpacity disabled={disabled} {...rest}>
       <ThemeContext.Provider value={{ variant }}>
         {children}
       </ThemeContext.Provider>
@@ -34,11 +31,7 @@ function Button({
 
 function Title({ children }: TextProps) {
   const { variant } = useContext(ThemeContext);
-  return (
-    <Text>
-      {children}
-    </Text>
-  );
+  return <Text>{children}</Text>;
 }
 
 Button.Title = Title;
