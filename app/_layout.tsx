@@ -3,6 +3,7 @@ import 'react-native-reanimated';
 import { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { PaperProvider } from 'react-native-paper';
 
 import * as SplashScreen from 'expo-splash-screen';
 import {
@@ -21,15 +22,11 @@ export {
 
 SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
+  const [loaded] = useFonts({
     Lexend_400Regular,
     Lexend_500Medium,
     Lexend_600SemiBold,
   });
-
-  useEffect(() => {
-    if (error) throw error;
-  }, [error]);
 
   useEffect(() => {
     if (loaded) {
@@ -41,7 +38,9 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-      <RootLayoutNav />
+      <PaperProvider>
+        <RootLayoutNav/>
+      </PaperProvider>
     </SafeAreaProvider>
   )
 }
