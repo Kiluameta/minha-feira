@@ -2,6 +2,7 @@ import 'react-native-reanimated';
 
 import { useEffect } from 'react';
 import { Stack } from 'expo-router';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import * as SplashScreen from 'expo-splash-screen';
 import {
@@ -10,6 +11,8 @@ import {
   Lexend_500Medium,
   Lexend_600SemiBold,
 } from '@expo-google-fonts/lexend'
+
+import Loading from '@/components/loading';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -34,11 +37,13 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  if (!loaded) {
-    return null; //loading
-  }
+  if (!loaded) return <Loading/>
 
-  return <RootLayoutNav />;
+  return (
+    <SafeAreaProvider>
+      <RootLayoutNav />
+    </SafeAreaProvider>
+  )
 }
 
 function RootLayoutNav() {
