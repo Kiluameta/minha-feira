@@ -1,42 +1,64 @@
 import React from "react";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Platform } from 'react-native';
 import { Tabs } from "expo-router";
-import { Pressable } from "react-native";
+import { getBottomSpace } from "react-native-iphone-x-helper";
+import { RFValue } from "react-native-responsive-fontsize";
 
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import Colors from "@/constants/Colors";
+
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
+  name: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
   color: string;
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+  return <MaterialCommunityIcons size={40} style={{ marginBottom: -3 }} {...props} />;
 }
 
 export default function TabLayout() {
   return (
-    <Tabs screenOptions={{}}>
+    <Tabs 
+      screenOptions={{ 
+        tabBarActiveTintColor: Colors.green[100], 
+        tabBarInactiveTintColor: Colors.green[400],
+        headerShown: false, 
+        tabBarHideOnKeyboard: true,
+        tabBarStyle: {
+          height: getBottomSpace() + RFValue(60),
+          zIndex: 10,
+          // opacity: loading || startVistoria ? 0 : 1,
+          paddingVertical: Platform.OS === "ios" ? 15 : 5,
+          borderTopEndRadius: 30,
+          borderTopStartRadius: 30,
+          shadowColor: "rgba(0,0,0,0.3)",
+          shadowOffset: { width: 0, height: 6 },
+          shadowOpacity: 1,
+          shadowRadius: 6,
+          elevation: 10,
+          marginTop: -getBottomSpace() - RFValue(60),
+          backgroundColor: Colors.green[500],
+        },
+        tabBarShowLabel: false,
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable>
-              {({ pressed }) => (
-                <FontAwesome
-                  name="info-circle"
-                  size={25}
-                  style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                />
-              )}
-            </Pressable>
-          ),
+          title: "Home",
+          tabBarIcon: ({ color }) => <TabBarIcon name="clock-time-eight-outline" color={color} />,
         }}
       />
       <Tabs.Screen
         name="two"
         options={{
           title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="basket" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="three"
+        options={{
+          title: "Tab Three",
+          tabBarIcon: ({ color }) => <TabBarIcon name="account-outline" color={color} />,
         }}
       />
     </Tabs>
