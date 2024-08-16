@@ -37,11 +37,11 @@ export default function App() {
 
   const onLayout = () => {
     let userSession = false;
-    if (userSession) {
-      router.navigate("/(tabs)");
-    } else {
-      router.navigate("/");
-    }
+    // if (userSession) {
+      router.navigate("/(tabs)/home");
+    // } else {
+    //   router.navigate("/");
+    // }
   };
 
   if (!loaded) return <Loading />;

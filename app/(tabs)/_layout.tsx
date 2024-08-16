@@ -41,23 +41,23 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="history"
         options={{
-          title: "Home",
+          title: "History",
           tabBarIcon: ({ color }) => <TabBarIcon name="clock-time-eight-outline" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="home"
         options={{
-          title: "Tab Two",
+          title: "Home",
           tabBarIcon: ({ color }) => <TabBarIcon name="basket" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="three"
+        name="account"
         options={{
-          title: "Tab Three",
+          title: "Account",
           tabBarIcon: ({ color }) => <TabBarIcon name="account-outline" color={color} />,
         }}
       />
